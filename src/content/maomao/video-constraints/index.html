@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--
+ *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
+ *
+ *  Use of this source code is governed by a BSD-style license
+ *  that can be found in the LICENSE file in the root of the source
+ *  tree.
+-->
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="description" content="WebRTC code samples">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+    <meta itemprop="description" content="Client-side WebRTC code samples">
+    <meta itemprop="image" content="../../../images/webrtc-icon-192x192.png">
+    <meta itemprop="name" content="WebRTC code samples">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta id="theme-color" name="theme-color" content="#ffffff">
+
+    <base target="_blank">
+
+    <title>getUserMedia: select resolution</title>
+
+    <link rel="icon" sizes="192x192" href="../../../images/webrtc-icon-192x192.png">
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../../css/main.css">
+
+    <style>
+        body, html {
+            height: 100%;
+        }
+
+        button {
+            margin: 0 10px 20px 0;
+            width: 90px;
+        }
+
+        div#buttons {
+            margin: 0 0 1em 0;
+        }
+
+        div#container {
+            max-width: 100%;
+        }
+
+        #errormessage {
+            display: none;
+            font-size: 300%;
+            color: red;
+        }
+
+        #videoblock {
+            display: none;
+            max-width: 100%;
+        }
+
+        p#dimensions {
+            height: 1em;
+            margin: 0 0 1.5em 0;
+        }
+
+        video {
+            background: none;
+            height: auto;
+            width: auto;
+        }
+
+        input {
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div id="container">
+
+    <h1><a href="//webrtc.github.io/samples/" title="WebRTC samples homepage">WebRTC samples</a> <span>getUserMedia: select resolution</span>
+    </h1>
+    <p></p>
+
+    <p>This example uses <a href="https://w3c.github.io/mediacapture-main/getusermedia.html#media-track-constraints"
+                            title="W3C getusermedia specification - constraints section">constraints</a>.</p>
+
+    <div id="buttons">
+        <button id="capture">Start Capture</button>
+    </div>
+
+    <div id="videoblock">
+        <p id="dimensions"></p>
+        <p id="capabilities"></p>
+
+        <video id="gum-res-local" playsinline autoplay></video>
+        <div id="width">
+            <label>Width <span>default</span>(px):</label>
+            <input id="width_range" type="range" min="0" max="7680" value="0">
+        </div>
+        <div id="height">
+            <label>Height <span>default</span>(px):</label>
+            <input id="height_range" type="range" min="0" max="7680" value="0">
+        </div>
+        <div id="frameRate">
+            <label>frameRate <span>default</span>(fps):</label>
+            <input id="frameRate_range" type="range" min="0" max="7680" value="0">
+        </div>
+        <div id="aspectRatio">
+            <label>aspectRatio <span>default</span>(width/height):</label>
+            <input id="aspectRatio_range" type="range" min="0" max="7680" value="0">
+        </div>
+        <input id="sizelock" type="checkbox">Lock video size<br>
+    </div>
+    <p id="errormessage"></p>
+
+</div>
+
+<script src="js/main.js" async></script>
+
+
+</body>
+</html>
