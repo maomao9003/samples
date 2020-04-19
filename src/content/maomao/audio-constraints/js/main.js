@@ -17,6 +17,15 @@ hangupButton.disabled = true;
 callButton.onclick = call;
 hangupButton.onclick = hangup;
 
+const sampleRateSelector = document.querySelector('select#sample_rate');
+const sampleSizeSelector = document.querySelector('select#sample_size');
+const latencySelector = document.querySelector('select#latency');
+const channelCountSelector = document.querySelector('select#channel_count');
+const agcSelector = document.querySelector('select#agc');
+const aecSelector = document.querySelector('select#aec');
+const nsSelector = document.querySelector('select#ns');  
+var selectConstaints = {};
+
 let pc1;
 let pc2;
 let localStream;
@@ -42,6 +51,86 @@ function gotStream(stream) {
     
     const capabilities = track.getCapabilities();
     console.log('Result capabilities: ' + JSON.stringify(capabilities));
+
+    if(capabilities && capabilities.sampleRate) {
+      console.log("sampleRateSelector min:" + capabilities.sampleRate.min + ", max:" + capabilities.sampleRate.max);
+      var objOption = document.createElement("OPTION");
+      objOption.value = capabilities.sampleRate.min;
+      objOption.text = capabilities.sampleRate.min;
+      sampleRateSelector.add(objOption);
+      if(capabilities.sampleRate.min != capabilities.sampleRate.max) {
+        console.log("TODO");
+      }
+    }
+
+    if(capabilities && capabilities.sampleSize) {
+      console.log("sampleSizeSelector min:" + capabilities.sampleSize.min + ", max:" + capabilities.sampleSize.max);
+      var objOption = document.createElement("OPTION");
+      objOption.value = capabilities.sampleSize.min;
+      objOption.text = capabilities.sampleSize.min;
+      sampleSizeSelector.add(objOption);
+      if(capabilities.sampleSize.min != capabilities.sampleSize.max) {
+        console.log("TODO");
+      }
+    }
+
+    if(capabilities && capabilities.latency) {
+      console.log("sampleSizeSelector min:" + capabilities.latency.min + ", max:" + capabilities.latency.max);
+      var objOption = document.createElement("OPTION");
+      objOption.value = capabilities.latency.min;
+      objOption.text = capabilities.latency.min;
+      latencySelector.add(objOption);
+      if(capabilities.latency.min != capabilities.latency.max) {
+        console.log("TODO");
+      }
+    }
+
+    if(capabilities && capabilities.channelCount) {
+      console.log("channelCountSelector min:" + capabilities.channelCount.min + ", max:" + capabilities.channelCount.max);
+      var objOption = document.createElement("OPTION");
+      objOption.value = capabilities.channelCount.min;
+      objOption.text = capabilities.channelCount.min;
+      channelCountSelector.add(objOption);
+      if(capabilities.channelCount.min != capabilities.channelCount.max) {
+        console.log("TODO");
+      }
+    }
+
+    if(capabilities && capabilities.echoCancellation) {
+      console.log("echoCancellation supported");
+      var objOption = document.createElement("OPTION");
+      objOption.value = true;
+      objOption.text = "true";
+      aecSelector.add(objOption);
+      objOption = document.createElement("OPTION");
+      objOption.value = false;
+      objOption.text = "false";
+      aecSelector.add(objOption);
+    }
+
+    if(capabilities && capabilities.noiseSuppression) {
+      console.log("noiseSuppression supported");
+      var objOption = document.createElement("OPTION");
+      objOption.value = true;
+      objOption.text = "true";
+      nsSelector.add(objOption);
+      objOption = document.createElement("OPTION");
+      objOption.value = false;
+      objOption.text = "false";
+      nsSelector.add(objOption);
+    }
+
+    if(capabilities && capabilities.autoGainControl) {
+      console.log("autoGainControl supported");
+      var objOption = document.createElement("OPTION");
+      objOption.value = true;
+      objOption.text = "true";
+      agcSelector.add(objOption);
+      objOption = document.createElement("OPTION");
+      objOption.value = false;
+      objOption.text = "false";
+      agcSelector.add(objOption);
+    }
 
     const capabilities_p = document.querySelector('#capabilities');
     capabilities_p.innerText = JSON.stringify(capabilities);
